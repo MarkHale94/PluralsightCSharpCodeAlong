@@ -10,8 +10,9 @@ namespace GradeBook
             //cw can be used as shorthand for the console.writeline
             //ctrl . can be used to access the quick fixes
             // /= can be used like += for shorthand of math operations
-            var book = new Book();
+            var book = new Book("Mark's Gradebook");
             book.AddGrade(89.1);
+
             var grades = new List<double>(){12.7, 10.3, 6.11, 4.1};
             grades.Add(56.1);
 
