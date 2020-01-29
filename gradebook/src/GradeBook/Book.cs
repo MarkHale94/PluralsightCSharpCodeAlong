@@ -12,20 +12,20 @@ namespace GradeBook {
             Grades.Add (grade);
         }
 
-        public void ShowStatistics () {
-            var result = 0.0;
-            var highGrade = double.MinValue;
-            var lowGrade = double.MaxValue;
-            foreach (double number in Grades) {
-                lowGrade = Math.Min (number, lowGrade);
-                highGrade = Math.Max (number, highGrade);
-                result += number;
+        public Statistics GetStatistics () {
+            var result = new Statistics ();
+            result.Average = 0.0;
+            result.High = double.MinValue;
+            result.Low = double.MaxValue;
+
+            foreach (double grade in Grades) {
+                result.Low = Math.Min (grade, result.Low);
+                result.High = Math.Max (grade, result.High);
+                result.Average += grade;
             }
-            result /= Grades.Count;
-            //:N1 is a formatter that specifies that it is a number with 1 decimal place precision
-            Console.WriteLine ($"The lowest grade is {lowGrade:N1}.");
-            Console.WriteLine ($"The highest grade is {highGrade:N1}.");
-            Console.WriteLine ($"The average grade is {result:N1}.");
+            result.Average /= Grades.Count;
+
+            return result;
         }
 
         private List<double> Grades;
