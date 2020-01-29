@@ -9,6 +9,7 @@ namespace GradeBook
         {
             //cw can be used as shorthand for the console.writeline
             //ctrl . can be used to access the quick fixes
+            // /= can be used like += for shorthand of math operations
 
             var grades = new List<double>(){12.7, 10.3, 6.11, 4.1};
 
