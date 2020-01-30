@@ -52,6 +52,24 @@ namespace GradeBook {
 
             result.Average /= Grades.Count;
 
+            switch(result.Average){
+                case var d when d >= 90:
+                    result.Letter = 'A';
+                    break;
+                case var d when d >= 80:
+                    result.Letter = 'B';
+                    break;
+                case var d when d >= 70:
+                    result.Letter = 'C';
+                    break;
+                case var d when d >= 60:
+                    result.Letter = 'D';
+                    break;
+                case var d when d >= 50:
+                    result.Letter = 'F';
+                    break;
+            }
+
             return result;
         }
 
