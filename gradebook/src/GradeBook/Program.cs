@@ -10,8 +10,22 @@ namespace GradeBook {
             //ctrl k+c can also be used for commenting out lines of code
             //ctrl k+u can be used to uncomment lines
             //static methods prevents the field from being instantiated with the object and can only be used through the class. Console.WriteLine is an example of a static method. You don't need to instantiate a new console in order to be able to use the writeline method.
-
             var book = new Book ("Mark's Gradebook");
+            while (true) {
+                Console.WriteLine ("Enter a grade or press 'q' to quit");
+                var input = Console.ReadLine ();
+                if (input == "q") {
+                    break;
+                }
+                try {
+                    var grade = double.Parse (input);
+                    book.AddGrade (grade);
+
+                } catch (Exception error) {
+                    Console.WriteLine ($"{error.Message}");
+                }
+            }
+
             book.AddGrade (89.1);
             book.AddGrade (42.3);
             var stats = book.GetStatistics ();
@@ -20,7 +34,7 @@ namespace GradeBook {
             Console.WriteLine ($"The lowest grade is {stats.Low:N1}.");
             Console.WriteLine ($"The highest grade is {stats.High:N1}.");
             Console.WriteLine ($"The average grade is {stats.Average:N1}.");
-            Console.WriteLine($"The letter grade is {stats.Letter}");
+            Console.WriteLine ($"The letter grade is {stats.Letter}");
         }
     }
 }

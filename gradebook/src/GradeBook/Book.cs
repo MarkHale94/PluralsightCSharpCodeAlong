@@ -27,7 +27,7 @@ namespace GradeBook {
                     AddGrade (50);
                     break;
                 default:
-                    AddGrade(0);
+                    AddGrade (0);
                     break;
             }
         }
@@ -35,6 +35,8 @@ namespace GradeBook {
         public void AddGrade (double grade) {
             if (grade <= 100 && grade >= 0) {
                 Grades.Add (grade);
+            } else {
+                throw new ArgumentException ($"Invalid {nameof(grade)}");
             }
         }
 
@@ -52,22 +54,22 @@ namespace GradeBook {
 
             result.Average /= Grades.Count;
 
-            switch(result.Average){
+            switch (result.Average) {
                 case var d when d >= 90:
                     result.Letter = 'A';
-                    break;
+                break;
                 case var d when d >= 80:
                     result.Letter = 'B';
-                    break;
+                break;
                 case var d when d >= 70:
                     result.Letter = 'C';
-                    break;
+                break;
                 case var d when d >= 60:
                     result.Letter = 'D';
-                    break;
+                break;
                 case var d when d >= 50:
                     result.Letter = 'F';
-                    break;
+                break;
             }
 
             return result;
