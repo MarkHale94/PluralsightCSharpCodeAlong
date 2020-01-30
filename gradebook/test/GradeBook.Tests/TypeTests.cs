@@ -6,14 +6,13 @@ namespace GradeBook.Tests {
         [Fact]
         public void StringsBehaveLikeValueTypes () {
             string name = "Mark";
-            var upper = MakeUppercase(name);
-            Assert.Equal("Mark", name);
-            Assert.Equal("MARK", upper);
+            var upper = MakeUppercase (name);
+            Assert.Equal ("Mark", name);
+            Assert.Equal ("MARK", upper);
         }
 
-        private string MakeUppercase(string parameter)
-        {
-            return parameter = parameter.ToUpper();
+        private string MakeUppercase (string parameter) {
+            return parameter = parameter.ToUpper ();
         }
 
         [Fact]

@@ -8,8 +8,34 @@ namespace GradeBook {
             Name = name;
             Grades = new List<double> ();
         }
+
+        public void AddLetterGrade (char letter) {
+            switch (letter) {
+                case 'A':
+                    AddGrade (90);
+                    break;
+                case 'B':
+                    AddGrade (80);
+                    break;
+                case 'C':
+                    AddGrade (70);
+                    break;
+                case 'D':
+                    AddGrade (60);
+                    break;
+                case 'F':
+                    AddGrade (50);
+                    break;
+                default:
+                    AddGrade(0);
+                    break;
+            }
+        }
+
         public void AddGrade (double grade) {
-            Grades.Add (grade);
+            if (grade <= 100 && grade >= 0) {
+                Grades.Add (grade);
+            }
         }
 
         public Statistics GetStatistics () {
@@ -23,6 +49,7 @@ namespace GradeBook {
                 result.High = Math.Max (grade, result.High);
                 result.Average += grade;
             }
+
             result.Average /= Grades.Count;
 
             return result;
