@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 
 namespace GradeBook {
+    public delegate void GradAddedDelegate(object sender, EventArgs args);
+
     public class Book {
         public Book (string name) {
             //can also use this.Name = name
@@ -35,6 +37,9 @@ namespace GradeBook {
         public void AddGrade (double grade) {
             if (grade <= 100 && grade >= 0) {
                 Grades.Add (grade);
+                if(GradeAdded != null){
+                    GradeAdded(this, new EventArgs());
+                }
             } else {
                 throw new ArgumentException ($"Invalid {nameof(grade)}");
             }
@@ -80,6 +85,7 @@ namespace GradeBook {
             get; 
             set;
         }
+        public event GradAddedDelegate GradeAdded;
         //Const variables cannot be set, not even in the constructor and are treated like static, where you have to access it through the class name.
         //Readonly variables can only be set in the constructor
         public const string CATEGORY = "Science";
