@@ -31,6 +31,8 @@ namespace GradeBook {
             var stats = book.GetStatistics ();
 
             //:N1 is a formatter that specifies that it is a number with 1 decimal place precision
+            Console.WriteLine(Book.CATEGORY);
+            Console.WriteLine($"For the book {book.Name}");  
             Console.WriteLine ($"The lowest grade is {stats.Low:N1}.");
             Console.WriteLine ($"The highest grade is {stats.High:N1}.");
             Console.WriteLine ($"The average grade is {stats.Average:N1}.");

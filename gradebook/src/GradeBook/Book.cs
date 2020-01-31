@@ -9,7 +9,7 @@ namespace GradeBook {
             Grades = new List<double> ();
         }
 
-        public void AddLetterGrade (char letter) {
+        public void AddGrade (char letter) {
             switch (letter) {
                 case 'A':
                     AddGrade (90);
@@ -76,6 +76,12 @@ namespace GradeBook {
         }
 
         private List<double> Grades;
-        public string Name;
+        public string Name {
+            get; 
+            set;
+        }
+        //Const variables cannot be set, not even in the constructor and are treated like static, where you have to access it through the class name.
+        //Readonly variables can only be set in the constructor
+        public const string CATEGORY = "Science";
     }
 }
