@@ -1,113 +1,129 @@
 using System;
 using Xunit;
 
-namespace GradeBook.Tests {
-    public delegate string WriteLogDelegate (string logMessage);
-    public class TypeTests {
+namespace GradeBook.Tests
+{
+    public delegate string WriteLogDelegate(string logMessage);
+    public class TypeTests
+    {
         int count = 0;
         [Fact]
-        public void WriteLogDelegateCanPointToMethod () {
+        public void WriteLogDelegateCanPointToMethod()
+        {
             //Delegates are useful because you can take a variable and treat it like a method
             //Delegates can invoke one or more methods, as long as the return type and the parameters match
             WriteLogDelegate log = ReturnMessage;
             log += ReturnMessage;
             log += IncrementCount;
-            var result = log ("Hello");
-            Assert.Equal ("Hello", result);
+            var result = log("Hello");
+            Assert.Equal("Hello", result);
         }
-        string ReturnMessage (string message) {
+        string ReturnMessage(string message)
+        {
             count++;
             return message;
         }
-        string IncrementCount (string message) {
+        string IncrementCount(string message)
+        {
             count++;
-            return message.ToLower ();
+            return message.ToLower();
         }
 
         [Fact]
-        public void StringsBehaveLikeValueTypes () {
+        public void StringsBehaveLikeValueTypes()
+        {
             string name = "Mark";
-            var upper = MakeUppercase (name);
-            Assert.Equal ("Mark", name);
-            Assert.Equal ("MARK", upper);
+            var upper = MakeUppercase(name);
+            Assert.Equal("Mark", name);
+            Assert.Equal("MARK", upper);
         }
 
-        private string MakeUppercase (string parameter) {
-            return parameter = parameter.ToUpper ();
+        private string MakeUppercase(string parameter)
+        {
+            return parameter = parameter.ToUpper();
         }
 
         [Fact]
-        public void CSharpCanPassByRef () {
+        public void CSharpCanPassByRef()
+        {
             //arrange
-            var book1 = GetBook ("Book 1");
-            GetBookSetName (ref book1, "New Name");
+            var book1 = GetBook("Book 1");
+            GetBookSetName(ref book1, "New Name");
             //act
 
             //assert
-            Assert.Equal ("New Name", book1.Name);
+            Assert.Equal("New Name", book1.Name);
         }
-        private void GetBookSetName (ref Book book, string name) {
-            book = new Book (name);
+        private void GetBookSetName(ref InMemoryBook book, string name)
+        {
+            book = new InMemoryBook(name);
             book.Name = name;
         }
 
         [Fact]
-        public void CSharpIsPassByValue () {
+        public void CSharpIsPassByValue()
+        {
             //arrange
-            var book1 = GetBook ("Book 1");
-            GetBookSetName (book1, "New Name");
+            var book1 = GetBook("Book 1");
+            GetBookSetName(book1, "New Name");
             //act
 
             //assert
-            Assert.NotEqual ("New Name", book1.Name);
+            Assert.NotEqual("New Name", book1.Name);
         }
 
-        private void GetBookSetName (Book book, string name) {
-            book = new Book (name);
+        private void GetBookSetName(InMemoryBook book, string name)
+        {
+            book = new InMemoryBook(name);
             book.Name = name;
         }
 
         [Fact]
-        public void CanSetNameFromReference () {
+        public void CanSetNameFromReference()
+        {
             //arrange
-            var book1 = GetBook ("Book 1");
-            SetName (book1, "New Name");
+            var book1 = GetBook("Book 1");
+            SetName(book1, "New Name");
             //act
 
             //assert
-            Assert.NotEqual ("Book 1", book1.Name);
+            Assert.NotEqual("Book 1", book1.Name);
         }
 
-        private void SetName (Book book, string name) {
+        private void SetName(InMemoryBook book, string name)
+        {
             book.Name = name;
         }
 
         [Fact]
-        public void GetBookReturnsDifferentObjects () {
+        public void GetBookReturnsDifferentObjects()
+        {
             //arrange
-            var book1 = GetBook ("Book 1");
-            var book2 = GetBook ("Book 2");
+            var book1 = GetBook("Book 1");
+            var book2 = GetBook("Book 2");
             //act
 
             //assert
-            Assert.Equal ("Book 1", book1.Name);
-            Assert.Equal ("Book 2", book2.Name);
-            Assert.NotSame (book1, book2);
+            Assert.Equal("Book 1", book1.Name);
+            Assert.Equal("Book 2", book2.Name);
+            Assert.NotSame(book1, book2);
         }
 
         [Fact]
-        public void GetBookReturnsSameObject () {
+        public void GetBookReturnsSameObject()
+        {
             //arrange
-            var book1 = GetBook ("Book 1");
+            var book1 = GetBook("Book 1");
             var book2 = book1;
             //act
 
             //assert
-            Assert.Same (book2, book1);
+            Assert.Same(book2, book1);
         }
 
-        Book GetBook (string name) {
-            return new Book (name);
+        InMemoryBook GetBook(string name)
+        {
+            return new InMemoryBook(name);
         }
     }
 }
